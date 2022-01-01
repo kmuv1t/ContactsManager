@@ -1,0 +1,8 @@
+*~
+.*~
+.DS_Store
+.Rhistory
+.RData
+/.idea/
+/__pycache__/
+*database.csv
