@@ -19,8 +19,11 @@ while True:
             resources.show_contacts()
 
         elif option == 2:
-            name = input(f'{Color.INPUT}Type the contact name: ')
-            resources.search_contact(name)
+            if resources.AGENDA:
+                name = input(f'{Color.INPUT}Type the contact name: ')
+                resources.search_contact(name)
+            else:
+                print(f'{Color.ERROR}**No contacts.**')
 
         elif option == 3:
             name = input(f'{Color.INPUT}Type the contact name to be added: ')
@@ -33,20 +36,26 @@ while True:
                 print(f'**{name} was added successfully.**')
 
         elif option == 4:
-            name = input(f'{Color.INPUT}Type the contact name to be edited: ')
-            try:
-                resources.AGENDA[name]
-                print(f'Editing contact: {name}')
-                number, email, address = resources.read_details()
-                resources.add_edit_contact(name, number, email, address)
-                print(f'**{name} was edited successfully.**')
-            except KeyError:
-                print(f'{Color.ERROR}**Non-existent contact.**')
+            if resources.AGENDA:
+                name = input(f'{Color.INPUT}Type the contact name to be edited: ')
+                try:
+                    resources.AGENDA[name]
+                    print(f'Editing contact: {name}')
+                    number, email, address = resources.read_details()
+                    resources.add_edit_contact(name, number, email, address)
+                    print(f'**{name} was edited successfully.**')
+                except KeyError:
+                    print(f'{Color.ERROR}**Non-existent contact.**')
+            else:
+                print(f'{Color.ERROR}**No contacts.**')
 
         elif option == 5:
-            name = input(f'{Color.INPUT}Type the contact name to be excluded: ')
-            resources.del_contact(name)
-            print(f'**{name} was excluded successfully.**')
+            if resources.AGENDA:
+                name = input(f'{Color.INPUT}Type the contact name to be excluded: ')
+                resources.del_contact(name)
+                print(f'**{name} was excluded successfully.**')
+            else:
+                print(f'{Color.ERROR}**No contacts.**')
 
         elif option == 6:
             filename = input('Type the name of the file to be exported: ')
